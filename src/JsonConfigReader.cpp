@@ -18,6 +18,7 @@ using std::stringstream;
 namespace
 configReader
 {
+    // Options relating to the category : General
 
     struct
     OptionsGeneral
@@ -54,7 +55,7 @@ configReader
 
         string   wait_for_video;
         bool     no_wait_for_video;
-        bool     mark_Watched;
+        bool     mark_watched;
         bool     no_mark_watched;
         string   color;
 
@@ -62,12 +63,151 @@ configReader
         string   alias;
     };
 
+
+    // Options relating to the category : Network
+    
     struct
     OptionsNetwork
+    {
+        string   proxy;
+        string   socket_timeout;
+        string   source_address;
+        bool     force_ipv4;
+        bool     force_ipv6;
+        bool     enable_file_urls;
+    };
+
+
+    // Options relating to the category : Geo-restriction
+    
+    struct
+    OptionsGeoRestriction
+    {
+        string   geo_verification_proxy;
+        string   xff;
+    };
+
+
+    // Options relating to the category : Geo-restriction
+
+    struct
+    OptionsVideoSelection
+    {
+        // Options 1 - 10
+
+        string   playlist_items;
+        string   min_filesize;
+        string   max_filesize;
+        string   date;
+        string   date_before;
+        string   date_after;
+        string   match_filters;
+        bool     no_match_filters;
+        string   break_match_filters;
+        bool     no_break_match_filters;
+
+        // Options 11 - 20
+
+        bool     no_playlist;
+        bool     yes_playlist;
+        string   age_limit;
+        bool     download_archive;
+        bool     no_download_archive;
+        string   max_downloads;
+        bool     break_on_existing;
+        bool     break_per_input;
+        bool     no_break_per_input;
+        string   skip_playlist_after_errors;
+    };
+
+    struct
+    OptionsDownload
     {
 
     };
 
+    struct
+    OptionsFilesystem
+    {
+
+    };
+
+    struct
+    OptionsThumbnail
+    {
+
+    };
+
+    struct
+    OptionsInternetShortcut
+    {
+
+    };
+
+    struct
+    OptionsVerbosityAndSimulation
+    {
+
+    };
+
+    struct
+    OptionsWorkarounds
+    {
+
+    };
+
+    struct
+    OptionsVideoFormat
+    {
+
+    };
+
+    struct
+    OptionsSubtitle
+    {
+
+    };
+
+    struct
+    OptionsAuthentication
+    {
+
+    };
+
+    // Options relating to the category : Post-processing
+    //
+    // THIS STRUCT IS NOT COMPLETED!!!
+
+    struct
+    OptionsPostProcessing
+    {
+        // Options : 1 - 10
+
+        string   extract_audio;
+        string   audio_format;
+        string   audio_quality;
+        string   remux_video;
+        string   recode_video;
+        string   postprocessor_args;
+        bool     keep_video;
+        bool     no_keep_video;
+        bool     post_overwrites;
+        bool     no_post;
+
+        // Options : 11 - 20
+    };
+
+    struct
+    OptionsSponsorBlock
+    {
+
+    };
+
+    struct
+    OptionsExtractor
+    {
+
+    };
 }  // End of namespace : configReader
 
 
