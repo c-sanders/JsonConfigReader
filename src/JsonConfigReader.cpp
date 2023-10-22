@@ -3,7 +3,14 @@
 #include <fstream>
 #include <sstream>
 
+// #include <boost/json/string_view.hpp>
+// Type(s) : string_view
 #include <boost/json.hpp>
+#include <boost/json/object.hpp>
+// Type(s) : object
+// #include <boost/json/value_to.hpp>
+// Function(s) : value_to
+
 // #include <iomanip>
 
 using std::string;
@@ -208,6 +215,34 @@ configReader
     {
 
     };
+
+
+    template<class T>
+    void
+    extract
+    (
+     boost::json::object const & obj,
+     T                         & t,
+     boost::json::string_view    key
+    )
+    {
+        t = value_to<T>(obj.at(key));
+    }
+
+
+    OptionsGeneral
+    tag_invoke
+    (
+     boost::json::value_to_tag< OptionsGeneral >,
+     value const & jv
+    )
+    {
+        OptionsGeneral   options;
+
+
+        return options;
+    }
+
 }  // End of namespace : configReader
 
 
