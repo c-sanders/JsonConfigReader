@@ -226,19 +226,25 @@ configReader
      boost::json::string_view    key
     )
     {
-        t = value_to<T>(obj.at(key));
+        t = boost::json::value_to<T>(obj.at(key));
     }
 
 
-    OptionsGeneral
+    OptionsGeoRestriction
     tag_invoke
     (
-     boost::json::value_to_tag< OptionsGeneral >,
+     boost::json::value_to_tag< OptionsGeoRestriction >,
      boost::json::value const & jv
     )
     {
-        OptionsGeneral   options;
+        OptionsGeoRestriction      options;
 
+        boost::json::object const& obj = jv.as_object();
+
+
+        extract(obj, options.geo_verification_proxy, "geo_verification_proxy");
+
+        cout << "geo_verification_proxy = " << options.geo_verification_proxy << endl;
 
         return options;
     }
@@ -437,6 +443,14 @@ processJsonModel
 
     switch (jv.kind())
     {
+        /*
+        case configReader::OptionsGeoRestriction :
+        {
+            cout << "configReader::OptionsGeoRestriction" << endl;
+
+            break;
+        }
+         */
         case boost::json::kind::object :
         {
             auto
