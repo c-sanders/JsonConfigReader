@@ -234,7 +234,7 @@ configReader
     tag_invoke
     (
      boost::json::value_to_tag< OptionsGeneral >,
-     value const & jv
+     boost::json::value const & jv
     )
     {
         OptionsGeneral   options;
