@@ -11,6 +11,8 @@ using std::string;
 namespace
 configReader
 {
+    // Option set : 1
+    // 
     // Options relating to the category : General
 
     struct
@@ -57,6 +59,8 @@ configReader
     };
 
 
+    // Option set : 2
+    // 
     // Options relating to the category : Network
     
     struct
@@ -71,6 +75,8 @@ configReader
     };
 
 
+    // Option set : 3
+    // 
     // Options relating to the category : Geo-restriction
     
     struct
@@ -81,7 +87,9 @@ configReader
     };
 
 
-    // Options relating to the category : Geo-restriction
+    // Option set : 4
+    // 
+    // Options relating to the category : Video selection
 
     struct
     OptionsVideoSelection
@@ -113,11 +121,15 @@ configReader
         string   skip_playlist_after_errors;
     };
 
+    // Option set : 5
+
     struct
     OptionsDownload
     {
 
     };
+
+    // Option set : 6
 
     struct
     OptionsFilesystem
@@ -125,11 +137,15 @@ configReader
 
     };
 
+    // Option set : 7
+
     struct
     OptionsThumbnail
     {
 
     };
+
+    // Option set : 8
 
     struct
     OptionsInternetShortcut
@@ -137,11 +153,15 @@ configReader
 
     };
 
+    // Option set : 9
+
     struct
     OptionsVerbosityAndSimulation
     {
 
     };
+
+    // Option set : 10
 
     struct
     OptionsWorkarounds
@@ -149,11 +169,15 @@ configReader
 
     };
 
+    // Option set : 11
+
     struct
     OptionsVideoFormat
     {
 
     };
+
+    // Option set : 12
 
     struct
     OptionsSubtitle
@@ -161,12 +185,16 @@ configReader
 
     };
 
+    // Option set : 13
+
     struct
     OptionsAuthentication
     {
 
     };
 
+    // Option set : 14
+    // 
     // Options relating to the category : Post-processing
     //
     // THIS STRUCT IS NOT COMPLETED!!!
@@ -190,11 +218,15 @@ configReader
         // Options : 11 - 20
     };
 
+    // Option set : 15
+
     struct
     OptionsSponsorBlock
     {
 
     };
+
+    // Option set : 16
 
     struct
     OptionsExtractor

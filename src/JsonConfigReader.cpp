@@ -429,15 +429,45 @@ processJsonModel
             {
             }
             else
+
+            // 11
+
             if (obj.contains("OptionsVideoFormat"))
             {
             }
             else
+
+            // 12
+
             if (obj.contains("OptionsSubtitle"))
             {
             }
             else
+
+            // 13
+
             if (obj.contains("OptionsAuthentication"))
+            {
+            }
+            else
+
+            // 14
+
+            if (obj.contains("OptionsPostProcessing"))
+            {
+            }
+            else
+
+            // 15
+
+            if (obj.contains("OptionsSponsorBlock"))
+            {
+            }
+            else
+
+            // 16
+
+            if (obj.contains("OptionsExtractor"))
             {
             }
             else
