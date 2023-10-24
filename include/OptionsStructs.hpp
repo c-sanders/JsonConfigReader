@@ -2,6 +2,12 @@
 #define OPTION_STRUCTS_HPP
 
 
+#include <string>
+
+
+using std::string;
+
+
 namespace
 configReader
 {
@@ -196,7 +202,7 @@ configReader
 
     };
 
-}
+}  // End of namespace : configReader
 
 
 #endif

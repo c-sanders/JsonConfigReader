@@ -11,7 +11,8 @@
 // #include <boost/json/value_to.hpp>
 // Function(s) : value_to
 
-// #include <iomanip>
+#include <OptionsStructs.hpp>
+
 
 using std::string;
 using std::cout;
@@ -25,197 +26,7 @@ using std::stringstream;
 namespace
 configReader
 {
-    // Options relating to the category : General
-
-    struct
-    OptionsGeneral
-    {
-        // Options 1 - 10
-
-        bool     help;
-        bool     version;
-        bool     update;
-        bool     no_update; 
-        string   update_to;
-
-        bool     ignore_errors;
-        bool     no_abort_on_error;
-        bool     abort_on_error;
-        bool     dump_user_agent;
-        bool     list_extractors;
-        
-        // Options 11 - 20
-
-        bool     extractor_descriptions;
-        string   use_extractors;
-        string   default_search;
-        bool     ignore_config;
-        bool     no_config_locations;
-
-        string   config_locations;
-        bool     flat_playlist;
-        bool     no_flat_playlist;
-        bool     live_from_start;
-        bool     no_live_from_start;
-
-        // Options 21 - 37
-
-        string   wait_for_video;
-        bool     no_wait_for_video;
-        bool     mark_watched;
-        bool     no_mark_watched;
-        string   color;
-
-        string   compat_options;
-        string   alias;
-    };
-
-
-    // Options relating to the category : Network
-    
-    struct
-    OptionsNetwork
-    {
-        string   proxy;
-        string   socket_timeout;
-        string   source_address;
-        bool     force_ipv4;
-        bool     force_ipv6;
-        bool     enable_file_urls;
-    };
-
-
-    // Options relating to the category : Geo-restriction
-    
-    struct
-    OptionsGeoRestriction
-    {
-        string   geo_verification_proxy;
-        string   xff;
-    };
-
-
-    // Options relating to the category : Geo-restriction
-
-    struct
-    OptionsVideoSelection
-    {
-        // Options 1 - 10
-
-        string   playlist_items;
-        string   min_filesize;
-        string   max_filesize;
-        string   date;
-        string   date_before;
-        string   date_after;
-        string   match_filters;
-        bool     no_match_filters;
-        string   break_match_filters;
-        bool     no_break_match_filters;
-
-        // Options 11 - 20
-
-        bool     no_playlist;
-        bool     yes_playlist;
-        string   age_limit;
-        bool     download_archive;
-        bool     no_download_archive;
-        string   max_downloads;
-        bool     break_on_existing;
-        bool     break_per_input;
-        bool     no_break_per_input;
-        string   skip_playlist_after_errors;
-    };
-
-    struct
-    OptionsDownload
-    {
-
-    };
-
-    struct
-    OptionsFilesystem
-    {
-
-    };
-
-    struct
-    OptionsThumbnail
-    {
-
-    };
-
-    struct
-    OptionsInternetShortcut
-    {
-
-    };
-
-    struct
-    OptionsVerbosityAndSimulation
-    {
-
-    };
-
-    struct
-    OptionsWorkarounds
-    {
-
-    };
-
-    struct
-    OptionsVideoFormat
-    {
-
-    };
-
-    struct
-    OptionsSubtitle
-    {
-
-    };
-
-    struct
-    OptionsAuthentication
-    {
-
-    };
-
-    // Options relating to the category : Post-processing
-    //
-    // THIS STRUCT IS NOT COMPLETED!!!
-
-    struct
-    OptionsPostProcessing
-    {
-        // Options : 1 - 10
-
-        string   extract_audio;
-        string   audio_format;
-        string   audio_quality;
-        string   remux_video;
-        string   recode_video;
-        string   postprocessor_args;
-        bool     keep_video;
-        bool     no_keep_video;
-        bool     post_overwrites;
-        bool     no_post;
-
-        // Options : 11 - 20
-    };
-
-    struct
-    OptionsSponsorBlock
-    {
-
-    };
-
-    struct
-    OptionsExtractor
-    {
-
-    };
-
+    // 
 
     template<class T>
     void
@@ -226,25 +37,85 @@ configReader
      boost::json::string_view    key
     )
     {
+        const
+        string   nameFunction = "configReader::extract",
+                 nF           = nameFunction + " : ";
+
+
+        cout << nF << "Enter" << endl;
+        cout << nF << "obj = " << obj << endl;
+        cout << nF << "obj.at(key) = " << obj.at(key) << endl;
+        cout << nF << "Key = " << key << endl;
+        cout << nF << obj.at(key) << endl;
+
         t = boost::json::value_to<T>(obj.at(key));
+
+        cout << nF << "Exit" << endl;
     }
 
+
+    // The following free function is used to convert from an object into JSON code.
+
+    void
+    tag_invoke
+    (
+     boost::json::value_from_tag,
+     boost::json::value         & jv,
+     OptionsGeoRestriction const& options
+    )
+    {
+        jv = {
+              {"geo_verification_proxy", options.geo_verification_proxy},
+              {"xff",                    options.xff}
+             };
+    }
+
+    // The following free function is used to convert from JSON code to an object.
+    //
+    // Who invokes this function?
+    //
+    // It is invoked from the function processJsonModel, when the object named options is instantiated. 
 
     OptionsGeoRestriction
     tag_invoke
     (
      boost::json::value_to_tag< OptionsGeoRestriction >,
-     boost::json::value const & jv
+     boost::json::value const & jv 
     )
     {
+        const
+        string                     nameFunction = "configReader::tag_invoke",
+                                   nF = nameFunction + " : ";
+
         OptionsGeoRestriction      options;
 
         boost::json::object const& obj = jv.as_object();
 
 
-        extract(obj, options.geo_verification_proxy, "geo_verification_proxy");
+        cout << nF << "Enter" << endl;
 
-        cout << "geo_verification_proxy = " << options.geo_verification_proxy << endl;
+        cout << nF << "obj = " << obj << endl;
+
+        cout << nF << "About to invoke function : extract" << endl;
+
+        extract
+        (
+         obj,                             // Source object to extract value from. 
+         options.geo_verification_proxy,  // Field in destination object to write value into. 
+         "geo_verification_proxy"         // Name of field in source object.
+        );
+
+        extract
+        (
+         obj,          // Source object to extract value from. 
+         options.xff,  // Field in destination object to write value into. 
+         "xff"         // Name of field in source object.
+        );
+
+        cout << "options.geo_verification_proxy = " << options.geo_verification_proxy << endl;
+        cout << "options.xff                    = " << options.xff << endl;
+
+        cout << nF << "Exit" << endl;
 
         return options;
     }
@@ -275,11 +146,26 @@ main
 )
 {
 	const
-	string   nameFunction = "main",
-		     nF           = nameFunction + " : ";
+	string         nameFunction = "main",
+		           nF           = nameFunction + " : ";
+
+    stringstream   jsonCode;
+
+    const
+    char         * jsonCode_p;   
 
 
 	cout << nF << "Enter" << endl;
+
+    configReader::OptionsGeoRestriction   options{"http://www.proxy.com:800", "Poop"};
+
+    cout << nF << "options = " << boost::json::serialize( boost::json::value_from( options ) ) << endl;
+
+    jsonCode << boost::json::serialize(boost::json::value_from(options));
+
+    jsonCode_p = jsonCode.str().c_str();
+
+    cout << "jsonCode = " << jsonCode_p << endl;
 
     parseFile(argv[1]);
 
@@ -393,6 +279,8 @@ parseFile
 
     jv = p.release();
 
+    cout << nF << "About to invoke the function : processJsonModel" << endl;
+
     processJsonModel(jv);
 
     goto return_routine;
@@ -433,32 +321,154 @@ processJsonModel
  boost::json::value   jv
 )
 {
-    int   status        = -1;
+    string   nameFunction  = "processJsonModel",
+             nF            = nameFunction + " : ";
 
-    int   counter_inner = 0,
-          counter_outer = 0;
+    int      status        = -1;
 
+    int      counter_inner = 0,
+             counter_outer = 0;
+
+
+    cout << nF << "Enter" << endl;
 
     // Maybe make the following code recursive.
 
     switch (jv.kind())
     {
-        /*
-        case configReader::OptionsGeoRestriction :
-        {
-            cout << "configReader::OptionsGeoRestriction" << endl;
-
-            break;
-        }
-         */
         case boost::json::kind::object :
         {
             auto
-            const & obj = jv.get_object();
+            const  & obj = jv.get_object();
+
+            string   indent = "    ";
 
 
+            cout << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
             cout << "json::kind::object" << endl;
+            cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
+            cout << boost::json::serialize(obj) << endl;
+            cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
 
+            // How can the type of the JSON object be determined?
+
+            // Test if the object contains a key called OptionsGeoRestriction 
+
+            cout << "About to check if the object contains a key : OptionsGeoRestriction" << endl;
+
+            // Option set : 1
+
+            if (obj.contains("OptionsGeneral"))
+            {
+                processOptionsGeneral();
+            }
+            else
+
+            // Option set : 2
+                
+            if (obj.contains("OptionsNetwork"))
+            {
+                processOptionsNetwork();
+            }
+            else
+
+            // Option set : 3
+
+            if (obj.contains("OptionsGeoRestriction"))
+            {
+                processOptionsGeoRestriction();
+            }
+            else
+
+            // Option set : 4
+
+            if (obj.contains("OptionsVideoSelection"))
+            {
+                processOptionsVideoSelection();
+            }
+            else
+
+            // Option set : 5
+
+            if (obj.contains("OptionsDownload"))
+            {
+            }
+            else
+
+            // Option set : 6
+
+            if (obj.contains("OptionsFilesystem"))
+            {
+            }
+            else
+
+            // Option set : 7
+
+            if (obj.contains("OptionsThumbnail"))
+            {
+            }
+            else
+
+            // Option set : 8
+
+            if (obj.contains("OptionsInternetShortcut"))
+            {
+            }
+            else
+
+            // Option set : 9
+
+            if (obj.contains("OptionsVerbosityAndSimulation"))
+            {
+            }
+            else
+
+            // Option set : 10
+
+            if (obj.contains("OptionsWorkarounds"))
+            {
+            }
+            else
+            if (obj.contains("OptionsVideoFormat"))
+            {
+            }
+            else
+            if (obj.contains("OptionsSubtitle"))
+            {
+            }
+            else
+            if (obj.contains("OptionsAuthentication"))
+            {
+            }
+            else
+            {
+                // Unknown JSON object type.
+            }
+
+                // Extract the value from the object.
+
+                auto
+                const & obj_value = obj.at("OptionsGeoRestriction");
+
+
+                cout << "Object is of type : OptionsGeoRestriction" << endl;
+
+                cout << "!!! obj_value = " << boost::json::serialize(obj_value) << endl;
+
+                // Create an object from the segment of JSON code which is contained
+                // within the variable jv.
+
+                configReader::OptionsGeoRestriction   options(boost::json::value_to<configReader::OptionsGeoRestriction>(obj_value));
+
+                cout << "options.geo_verification_proxy = " << options.geo_verification_proxy << endl;
+                cout << "options.xff                    = " << options.xff << endl;
+            }
+            else
+            if (obj.contains("OptionsGeneral"))
+            {
+                cout << "Object is of type : OptionsGeneral" << endl;
+            }
+                
             counter_outer++;
 
             cout << "Counter outer = " << counter_outer << endl;
@@ -478,7 +488,10 @@ processJsonModel
 
                 for (;;)
                 {
-                    cout << /* * indent << */ boost::json::serialize(it->key()) << " : ";
+                    cout << "For loop contents :" << endl;
+                    cout << "-------------------" << endl;
+
+                    cout << indent << boost::json::serialize(it->key()) << " : ";
                     cout << boost::json::serialize(it->value()) << endl;
 
                     ++it;
