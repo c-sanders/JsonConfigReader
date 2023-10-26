@@ -106,7 +106,9 @@ libdir_boost=c:\users\craig\boost_1_82_0\stage\x64\lib
 # File lists
 # ======================================
 
-JsonConfigReader_obj_files=JsonConfigReader.obj
+JsonConfigReader_obj_files=JsonConfigReader.obj \
+                           Utilities.obj \
+                           JsonToObject.obj
 
 link_flags_ms=$(lib_files_ms)
 

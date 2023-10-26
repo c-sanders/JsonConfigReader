@@ -9,8 +9,13 @@ using std::string;
 
 
 namespace
-configReader
+jsonConfigReader
 {
+
+namespace
+options
+{
+
     // Option set : 1
     // 
     // Options relating to the category : General
@@ -233,6 +238,8 @@ configReader
     {
 
     };
+
+}  // End of namespace : options
 
 }  // End of namespace : configReader
 
