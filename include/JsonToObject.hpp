@@ -16,6 +16,7 @@ jsonConfigReader
 namespace
 jsonToObject
 {
+    /*
     template<class T>
     void
     extract
@@ -24,6 +25,7 @@ jsonToObject
      T                         & t,
      boost::json::string_view    key
     );
+     */
 
 
     // The following free function is used to convert from JSON code to an object.
@@ -32,12 +34,14 @@ jsonToObject
     //
     // It is invoked from the function processJsonModel, when the object named options is instantiated. 
 
+    /*
     jsonConfigReader::options::OptionsGeoRestriction
     tag_invoke
     (
      boost::json::value_to_tag< jsonConfigReader::options::OptionsGeoRestriction >,
      boost::json::value const & jv 
     );
+     */
 
 }  // End of namespace : jsonToObject
 

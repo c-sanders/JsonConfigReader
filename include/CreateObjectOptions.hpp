@@ -2,6 +2,20 @@
 #define CREATEOBJECTOPTIONS_HPP
 
 
+#include <string>
+#include <iostream>
+
+#include <boost/json.hpp>
+#include <boost/json/object.hpp>
+// Type(s) : object
+
+#include <OptionsStructs.hpp>
+
+using std::string;
+using std::cout;
+using std::endl;
+
+
 namespace jsonConfigReader
 {
 
@@ -96,6 +110,13 @@ processObjectOptions
     void
     processOptionsNetwork
     (
+    );
+
+    void
+    processObjectOptionsGeoRestriction
+    (
+     const
+     boost::json::object & obj
     );
 
     void
