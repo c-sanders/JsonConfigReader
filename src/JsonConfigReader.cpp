@@ -21,13 +21,15 @@ main
 )
 {
 	const
-	string         nameFunction = "main",
-		           nF           = nameFunction + " : ";
+	string               nameFunction = "main",
+		                 nF           = nameFunction + " : ";
 
-    stringstream   jsonCode;
+    stringstream         jsonCode;
 
     const
-    char         * jsonCode_p;   
+    char               * jsonCode_p;
+
+    boost::json::value   jsonModel;
 
 
 	cout << nF << "Enter" << endl;
@@ -44,7 +46,25 @@ main
     cout << "jsonCode = " << jsonCode_p << endl;
      */
 
-    jsonConfigReader::utilities::parseFile(argv[1]);
+    cout << nF << "About to invoke function : parseFile" << endl;
+
+    jsonModel = jsonConfigReader::utilities::parseFile(argv[1]);
+
+    cout << nF << "Have invoked function : parseFile" << endl;
+    
+    cout << nF << endl;
+    cout << nF << endl;
+    cout << nF << endl;
+    cout << nF << endl;
+    cout << nF << endl;
+
+    // The following function is currently invoked from the function parseFile.
+
+    cout << nF << "About to invoke function : processJsonModel" << endl;
+
+    jsonConfigReader::utilities::processJsonModel(jsonModel);
+
+    cout << nF << "Have invoked function : processJsonModel" << endl;
 
 	cout << nF << "Exit" << endl;
 }

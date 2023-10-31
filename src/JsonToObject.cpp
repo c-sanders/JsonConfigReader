@@ -50,8 +50,8 @@ jsonToObject
     // Furthermore, the struct which is to be created resides in the
     // jsonConfigReader::options namespace.
     // 
-    // Note the discrepancy in namespaces here. I think this is what is causing
-    // the problems at compile time.
+    // Note the discrepancy across three namespaces here. I think this is what
+    // is causing the problems at compile time.
 
     jsonConfigReader::jsonToObject::OptionsGeoRestriction
     tag_invoke

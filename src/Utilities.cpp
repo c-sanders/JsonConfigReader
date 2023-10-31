@@ -111,11 +111,11 @@ parseFile
         goto return_failure_routine;
     }
 
-    jv = p.release();
+    // jv = p.release();
 
-    cout << nF << "About to invoke the function : processJsonModel" << endl;
+    // cout << nF << "About to invoke the function : processJsonModel" << endl;
 
-    processJsonModel(jv);
+    // processJsonModel(jv);
 
     goto return_routine;
 
@@ -134,14 +134,14 @@ parseFile
             cout << nF << "About to exit this function with a generic failure. Error status = " << status << endl;
         }
 
-        cout << nF << "Exit" << endl;
+        cout << nF << "Exit (with failure)" << endl;
 
         return status;
     }
 
     return_routine :
     {
-        cout << nF << "Exit" << endl;
+        cout << nF << "Exit (with success)" << endl;
 
         return p.release();
     }
@@ -212,44 +212,11 @@ processJsonModel
 
             if (obj.contains("OptionsGeoRestriction"))
             {
-                // Object obj will be in the form of a key-value pair, which
-                // should have the following format;
-                //
-                //   "OptionsGeoRestriction" :
-                //   {
-                //     "geo_verification_proxy" : "http:///www.proxy.com:800",
-                //     "xff" : "Poop"
-                //   }
-
-                cout << "Object is of type : OptionsGeoRestriction" << endl;
-
-                // Get the value of this key-value pair.
-
-                auto
-                const & obj_value = obj.at("OptionsGeoRestriction");
-
-                cout << "!!! obj_value = " << boost::json::serialize(obj_value) << endl;
-
-                // Create an object from the segment of JSON code which is contained
-                // within the variable jv.
-
-                jsonConfigReader::options::OptionsGeoRestriction   options
-                                                                   (
-                                                                    boost::json::value_to<jsonConfigReader::options::OptionsGeoRestriction>
-                                                                    (
-                                                                     obj_value
-                                                                    )
-                                                                   );
-
-                /*
-                jv_new = {
-                          {"geo_verification_proxy", options.geo_verification_proxy},
-                          {"xff",                    options.xff}
-                         };
-                 */
-
-                cout << "options.geo_verification_proxy = " << options.geo_verification_proxy << endl;
-                cout << "options.xff                    = " << options.xff << endl;
+                //                                      processOptionsGeoRestriction
+                jsonConfigReader::processObjectOptions::processObjectOptionsGeoRestriction
+                (
+                 obj
+                );
             }
             else
 
