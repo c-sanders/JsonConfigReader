@@ -112,7 +112,8 @@ processObjectOptions
     (
     );
 
-    void
+    struct
+    jsonConfigReader::options::OptionsGeoRestriction
     processObjectOptionsGeoRestriction
     (
      const
@@ -124,9 +125,12 @@ processObjectOptions
     (
     );
 
-    void
+    struct
+    jsonConfigReader::options::OptionsPostProcessing
     processOptionsPostProcessing
     (
+     const
+     boost::json::object & obj
     );
 
     void

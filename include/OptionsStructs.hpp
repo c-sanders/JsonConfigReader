@@ -256,10 +256,44 @@ options
         string   postprocessor_args;
         bool     keep_video;
         bool     no_keep_video;
-        bool     post_overwrites;
-        bool     no_post;
+        bool     post_overwrites;   
+        bool     no_post_overwrites;
 
         // Options : 11 - 20
+
+        bool     embed_subs;
+        bool     no_embed_subs;
+        bool     embed_thumbnail;
+        bool     no_embed_thumbnail;
+        bool     embed_metadata;
+        bool     no_embed_metadata;
+        bool     embed_chapters;
+        bool     no_embed_chapters;
+        bool     embed_info_json;
+        bool     no_embed_info_json;
+
+        // Options : 21 - 30
+
+        string   parse_metadata;
+        string   replace_in_metadata;
+        bool     xattrs;
+        string   concat_playlist;
+        string   fixup;
+        string   ffmpeg_location;
+        string   exec;
+        bool     no_exec;
+        string   convert_subs;
+        string   convert_thumbnails;
+
+        // Options : 31 - 37
+
+        bool     split_chapters
+        bool     no_split_chapters;
+        bool     remove_chapters;
+        bool     no_remove_chapters;
+        bool     force_keyframes_at_cuts;
+        bool     no_force_keyframes_at_cuts;
+        string   use_postprocessor;
     };
 
     // Option set : 15

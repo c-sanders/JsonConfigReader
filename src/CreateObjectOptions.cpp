@@ -103,7 +103,7 @@ processObjectOptions
 
 // Function : processObjectOptionsGeoRestriction
 // =============================================
-// Alias    : copyJsonToObjectOptionGeoRestriction
+// Alias    : copyJsonObjectToStructObject_GeoRestriction
 // 
 // 
 // Process a JSON object which contains the values related to the
@@ -130,6 +130,7 @@ processObjectOptions
 //          "xff" : "Poop"
 //         }
 //
+
 struct
 jsonConfigReader::options::OptionsGeoRestriction
 processObjectOptionsGeoRestriction
@@ -156,15 +157,9 @@ processObjectOptionsGeoRestriction
      )
     );
 
-    cout << nF << "Enter" << endl;
-
-    /*
     cout << "Object is of type : OptionsGeoRestriction" << endl;
-
     cout << "!!! obj_value = " << boost::json::serialize(obj_value) << endl;
-     */
 
-    cout << nF << "Exit" << endl;
 
     return options;
 }
@@ -177,9 +172,12 @@ processObjectOptionsGeoRestriction
     {
     }
 
-    void
+    struct
+    jsonConfigReader::options::OptionsPostProcessing
     processOptionsPostProcessing
     (
+     const
+     boost::json::object & obj
     )
     {
     }
