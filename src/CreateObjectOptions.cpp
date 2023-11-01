@@ -18,14 +18,19 @@ createObjectOptionsNetwork
 (
 );
 
-/*
+
+void
+createObjectOptionsGeoRestriction
+(
+)
 {
-    jv = {
-      {"geo_verification_proxy", options.geo_verification_proxy},
-      {"xff",                    options.xff}
-    };
+    /*
+    jv_new = {
+              {"geo_verification_proxy", options.geo_verification_proxy},
+              {"xff",                    options.xff}
+             };
+     */
 }
- */
 
 
 void
@@ -95,7 +100,38 @@ processObjectOptions
     {
     }
 
-void
+
+// Function : processObjectOptionsGeoRestriction
+// =============================================
+// Alias    : copyJsonToObjectOptionGeoRestriction
+// 
+// 
+// Process a JSON object which contains the values related to the
+// Geo-Restriction settings.
+// 
+// This function processes the JSON object by copying the values from it
+// into an object which is an instance of a customised struct.
+//
+// Return value :
+// --------------
+// 
+// A customised struct object which contains the values from the JSON object.
+// 
+// Parameters :
+// ------------
+// 
+// obj : A JSON object which contains the Geo-Restriction settings. These should
+//       be in the form of a key-value pair, an example of which is listed
+//       below;
+//
+//         "OptionsGeoRestriction" :
+//         {
+//          "geo_verification_proxy" : "http:///www.proxy.com:800",
+//          "xff" : "Poop"
+//         }
+//
+struct
+jsonConfigReader::options::OptionsGeoRestriction
 processObjectOptionsGeoRestriction
 (
  const
@@ -106,38 +142,8 @@ processObjectOptionsGeoRestriction
     string   nameFunction = "processObjectOptionsGeoRestriction",
              nF           = nameFunction + " : ";
 
-    // Get the value of this key-value pair.
-
     auto
-    const  & obj_value    = obj.at("OptionsGeoRestriction");
-
-    // jsonConfigReader::options::OptionsGeoRestriction   options;
-
-
-    cout << nF << "Enter" << endl;
-
-    // Object obj will be in the form of a key-value pair, which
-    // should have the following format;
-    //
-    //   "OptionsGeoRestriction" :
-    //   {
-    //     "geo_verification_proxy" : "http:///www.proxy.com:800",
-    //     "xff" : "Poop"
-    //   }
-
-    cout << "Object is of type : OptionsGeoRestriction" << endl;
-
-    cout << "!!! obj_value = " << boost::json::serialize(obj_value) << endl;
-
-    // Create an object from the segment of JSON code which is contained
-    // within the variable jv.
-
-    // We are currently in namespace jsonConfigReader::utilities
-    //
-    // We are attempting to create a struct from namespace jsonConfigReader::options
-    //
-    // The function which will create this struct resides in namespace
-    // jsonConfigReader::jsonToObject
+    const  & objValue    = obj.at("OptionsGeoRestriction");
 
     // Create a new object of type struct OptionsGeoRestriction
 
@@ -146,21 +152,21 @@ processObjectOptionsGeoRestriction
     (
      boost::json::value_to<jsonConfigReader::options::OptionsGeoRestriction>
      (
-      obj_value
+      objValue
      )
     );
 
+    cout << nF << "Enter" << endl;
+
     /*
-    jv_new = {
-              {"geo_verification_proxy", options.geo_verification_proxy},
-              {"xff",                    options.xff}
-             };
+    cout << "Object is of type : OptionsGeoRestriction" << endl;
+
+    cout << "!!! obj_value = " << boost::json::serialize(obj_value) << endl;
      */
 
-    cout << nF << "options.geo_verification_proxy = " << options.geo_verification_proxy << endl;
-    cout << nF << "options.xff                    = " << options.xff << endl;
-
     cout << nF << "Exit" << endl;
+
+    return options;
 }
 
 

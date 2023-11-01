@@ -212,11 +212,20 @@ processJsonModel
 
             if (obj.contains("OptionsGeoRestriction"))
             {
-                //                                      processOptionsGeoRestriction
-                jsonConfigReader::processObjectOptions::processObjectOptionsGeoRestriction
-                (
-                 obj
-                );
+                // Create an empty struct object of type OptionsGeoRestriction.
+                // This will be used to hold the values which have been read in
+                // from the JSON file.
+
+                jsonConfigReader::options::OptionsGeoRestriction   options;
+
+
+                options = jsonConfigReader::processObjectOptions::processObjectOptionsGeoRestriction
+                          (
+                           obj
+                          );
+
+                cout << nF << "options.xff                    = " << options.xff << endl;
+                cout << nF << "options.geo_verification_proxy = " << options.geo_verification_proxy << endl;
             }
             else
 
