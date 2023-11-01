@@ -158,7 +158,7 @@ processObjectOptionsGeoRestriction
     );
 
     cout << "Object is of type : OptionsGeoRestriction" << endl;
-    cout << "!!! obj_value = " << boost::json::serialize(obj_value) << endl;
+    cout << "!!! objValue = " << boost::json::serialize(objValue) << endl;
 
 
     return options;
@@ -180,6 +180,29 @@ processObjectOptionsGeoRestriction
      boost::json::object & obj
     )
     {
+        const
+        string   nameFunction = "processObjectOptionsPostProcessing",
+                 nF           = nameFunction + " : ";
+
+        auto
+        const  & objValue = obj.at("OptionsPostProcessing");
+
+        // Create a new object of type struct OptionsPostProcessing
+
+        jsonConfigReader::options::OptionsPostProcessing
+        options
+        (
+         boost::json::value_to<jsonConfigReader::options::OptionsPostProcessing>
+         (
+          objValue
+         )
+        );
+
+        cout << "Object is of type : OptionsPostProcessing" << endl;
+        cout << "!!! objValue = " << boost::json::serialize(objValue) << endl;
+
+
+        return options;
     }
 
     void

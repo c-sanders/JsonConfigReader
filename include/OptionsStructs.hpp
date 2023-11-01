@@ -287,7 +287,7 @@ options
 
         // Options : 31 - 37
 
-        bool     split_chapters
+        bool     split_chapters;
         bool     no_split_chapters;
         bool     remove_chapters;
         bool     no_remove_chapters;
