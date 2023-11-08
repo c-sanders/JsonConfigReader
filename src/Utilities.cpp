@@ -188,15 +188,13 @@ processJsonModel
 
             // How can the type of the JSON object be determined?
 
-            // Test if the object contains a key called OptionsGeoRestriction 
-
-            cout << "About to check if the object contains a key : OptionsGeoRestriction" << endl;
-
             // Option set : 1
 
             if (obj.contains("OptionsGeneral"))
             {
-                jsonConfigReader::processObjectOptions::processOptionsGeneral();
+                cout << nF << "Object contains a key : OptionsGeneral" << endl;
+
+                // jsonConfigReader::processObjectOptions::processOptionsGeneral();
             }
             else
 
@@ -204,7 +202,11 @@ processJsonModel
                 
             if (obj.contains("OptionsNetwork"))
             {
-                jsonConfigReader::processObjectOptions::processOptionsNetwork();
+                cout << nF << "Object contains a key : OptionsNetwork" << endl;
+
+                // jsonConfigReader::options::OptionsNetwork   options;
+
+                // jsonConfigReader::processObjectOptions::processOptionsNetwork();
             }
             else
 
@@ -212,20 +214,29 @@ processJsonModel
 
             if (obj.contains("OptionsGeoRestriction"))
             {
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << nF << "Object contains a key : OptionsGeoRestriction" << endl;
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+                // jsonConfigReader::processObjectOptions::processOptionsGeoRestriction(obj);
+
                 // Create an empty struct object of type OptionsGeoRestriction.
                 // This will be used to hold the values which have been read in
                 // from the JSON file.
 
-                jsonConfigReader::options::OptionsGeoRestriction   options;
+                jsonConfigReader::optionsGeoRestriction::OptionsStruct   options;
 
 
-                options = jsonConfigReader::processObjectOptions::processObjectOptionsGeoRestriction
+                options = jsonConfigReader::processObjectOptions::processOptionsGeoRestriction
                           (
                            obj
                           );
 
                 cout << nF << "options.xff                    = " << options.xff << endl;
                 cout << nF << "options.geo_verification_proxy = " << options.geo_verification_proxy << endl;
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
             }
             else
 
@@ -233,7 +244,9 @@ processJsonModel
 
             if (obj.contains("OptionsVideoSelection"))
             {
-                jsonConfigReader::processObjectOptions::processOptionsVideoSelection();
+                cout << nF << "Object contains a key : OptionsVideoSelection" << endl;
+
+                // jsonConfigReader::processObjectOptions::processOptionsVideoSelection();
             }
             else
 
@@ -241,7 +254,7 @@ processJsonModel
 
             if (obj.contains("OptionsDownload"))
             {
-
+                cout << nF << "Object contains a key : OptionsDownload" << endl;
             }
             else
 
@@ -249,6 +262,7 @@ processJsonModel
 
             if (obj.contains("OptionsFilesystem"))
             {
+                cout << nF << "Object contains a key : OptionsFilesystem" << endl;
             }
             else
 
@@ -256,6 +270,7 @@ processJsonModel
 
             if (obj.contains("OptionsThumbnail"))
             {
+                cout << nF << "Object contains a key : OptionsThumbnail" << endl;
             }
             else
 
@@ -263,6 +278,7 @@ processJsonModel
 
             if (obj.contains("OptionsInternetShortcut"))
             {
+                cout << nF << "Object contains a key : OptionsInternetShortcut" << endl;
             }
             else
 
@@ -305,6 +321,21 @@ processJsonModel
 
             if (obj.contains("OptionsPostProcessing"))
             {
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << nF << "Object contains a key : OptionsPostProcessing" << endl;
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+                jsonConfigReader::optionsPostProcessing::OptionsStruct   options;
+
+
+                options = jsonConfigReader::processObjectOptions::processOptionsPostProcessing
+                          (
+                           obj
+                          );
+
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
             }
             else
 

@@ -53,6 +53,7 @@ jsonToObject
     // Note the discrepancy across three namespaces here. I think this is what
     // is causing the problems at compile time.
 
+    /*
     jsonConfigReader::jsonToObject::OptionsGeoRestriction
     tag_invoke
     (
@@ -96,6 +97,54 @@ jsonToObject
 
         return options;
     }
+     */
+
+
+    jsonConfigReader::jsonToObject::OptionsPostProcessing
+    tag_invoke
+    (
+     boost::json::value_to_tag< OptionsPostProcessing >,
+     boost::json::value const & jv 
+    )
+    {
+        const
+        string                     nameFunction = "configReader::tag_invoke",
+                                   nF = nameFunction + " : ";
+
+        OptionsPostProcessing      options;
+
+        boost::json::object const& obj = jv.as_object();
+
+
+        cout << nF << "Enter" << endl;
+
+        cout << nF << "obj = " << obj << endl;
+
+        cout << nF << "About to invoke function : extract" << endl;
+
+        /*
+        extract
+        (
+         obj,                             // Source object to extract value from. 
+         options.geo_verification_proxy,  // Field in destination object to write value into. 
+         "geo_verification_proxy"         // Name of field in source object.
+        );
+
+        extract
+        (
+         obj,          // Source object to extract value from. 
+         options.xff,  // Field in destination object to write value into. 
+         "xff"         // Name of field in source object.
+        );
+
+        cout << "options.geo_verification_proxy = " << options.geo_verification_proxy << endl;
+        cout << "options.xff                    = " << options.xff << endl;
+         */
+
+        cout << nF << "Exit" << endl;
+
+        return options;
+    }
 
 }
 
@@ -122,5 +171,21 @@ objectToJson
              };
     }
 
+
+    void
+    tag_invoke
+    (
+     boost::json::value_from_tag,
+     boost::json::value         & jv,
+     OptionsPostProcessing const& options
+    )
+    {
+        /*
+        jv = {
+              {"geo_verification_proxy", options.geo_verification_proxy},
+              {"xff",                    options.xff}
+             };
+         */
+    }
 
 }  // End of namespace : objectToJson

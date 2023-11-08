@@ -132,8 +132,8 @@ processObjectOptions
 //
 
 struct
-jsonConfigReader::options::OptionsGeoRestriction
-processObjectOptionsGeoRestriction
+jsonConfigReader::optionsGeoRestriction::OptionsStruct
+processOptionsGeoRestriction
 (
  const
  boost::json::object & obj
@@ -146,12 +146,12 @@ processObjectOptionsGeoRestriction
     auto
     const  & objValue    = obj.at("OptionsGeoRestriction");
 
-    // Create a new object of type struct OptionsGeoRestriction
+    // Create a new object of type struct optionsGeoRestriction::OptionsStruct
 
-    jsonConfigReader::options::OptionsGeoRestriction
+    jsonConfigReader::optionsGeoRestriction::OptionsStruct
     options
     (
-     boost::json::value_to<jsonConfigReader::options::OptionsGeoRestriction>
+     boost::json::value_to<jsonConfigReader::optionsGeoRestriction::OptionsStruct>
      (
       objValue
      )
@@ -164,7 +164,6 @@ processObjectOptionsGeoRestriction
     return options;
 }
 
-
     void
     processOptionsVideoSelection
     (
@@ -172,9 +171,10 @@ processObjectOptionsGeoRestriction
     {
     }
 
+
     struct
-    jsonConfigReader::options::OptionsPostProcessing
-    processOptionsPostProcessing
+    jsonConfigReader::optionsPostProcessing::OptionsStruct
+    processObjectOptionsPostProcessing
     (
      const
      boost::json::object & obj
@@ -187,12 +187,30 @@ processObjectOptionsGeoRestriction
         auto
         const  & objValue = obj.at("OptionsPostProcessing");
 
+        /*
+        struct
+        jsonConfigReader::optionsPostProcessing::OptionsStruct   rarr;
+         */
+
         // Create a new object of type struct OptionsPostProcessing
 
-        jsonConfigReader::options::OptionsPostProcessing
+        /*
+        jsonConfigReader::options::OptionsGeoRestriction
         options
         (
-         boost::json::value_to<jsonConfigReader::options::OptionsPostProcessing>
+         boost::json::value_to<jsonConfigReader::options::OptionsGeoRestriction>
+         (
+          objValue
+         )
+        );
+         */
+
+        // The compiler doesn't like the following instruction.
+
+        jsonConfigReader::optionsPostProcessing::OptionsStruct
+        options
+        (
+         boost::json::value_to<jsonConfigReader::optionsPostProcessing::OptionsStruct>
          (
           objValue
          )
@@ -204,6 +222,7 @@ processObjectOptionsGeoRestriction
 
         return options;
     }
+
 
     void
     processObjectOptionsSponsorBlock
