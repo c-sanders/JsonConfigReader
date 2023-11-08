@@ -9,14 +9,14 @@
 // #include <boost/json/object.hpp>
 // Type(s) : object
 
+#include <OptionsGeoRestriction.hpp>
+#include <OptionsPostProcessing.hpp>
+
 using std::cout;
 using std::endl;
 
 // #include <JsonToObject.hpp>
 
-// When an instance of OptionsGeoRestriction needs to be created, the compiler
-// will go searching for an appropriate function called tag_invoke. This
-// appropriate function is declared in the header file JsonToObject.hpp
 
 using std::string;
 
@@ -30,6 +30,15 @@ jsonConfigReader
 namespace
 options
 {
+    template<class T>
+    void
+    extract
+    (
+     boost::json::object const & obj,
+     T                         & t,
+     boost::json::string_view    key
+    );
+
 
     // Option set : 1
     // 
@@ -93,42 +102,6 @@ options
         bool     force_ipv6;
         bool     enable_file_urls;
     };
-
-
-    // Option set : 3
-    // 
-    // Options relating to the category : Geo-restriction
-    
-    struct
-    OptionsGeoRestriction
-    {
-        string   geo_verification_proxy;
-        string   xff;
-    };
-
-
-    template<class T>
-    void
-    extract
-    (
-     boost::json::object const & obj,
-     T                         & t,
-     boost::json::string_view    key
-    );
-
-
-    // The following free function is used to convert from JSON code to an object.
-    //
-    // Who invokes this function?
-    //
-    // It is invoked from the function processJsonModel, when the object named options is instantiated. 
-
-    jsonConfigReader::options::OptionsGeoRestriction
-    tag_invoke
-    (
-     boost::json::value_to_tag< jsonConfigReader::options::OptionsGeoRestriction >,
-     boost::json::value const & jv 
-    );
 
 
     // Option set : 4
@@ -240,8 +213,65 @@ options
     // Option set : 14
     // 
     // Options relating to the category : Post-processing
-    //
-    // THIS STRUCT IS NOT COMPLETED!!!
+
+    class
+    OptionsPostProcessing_class
+    {
+        public :
+
+            OptionsPostProcessing_class();
+
+        private :
+
+            // Options : 1 - 10
+
+            string   extract_audio;
+            string   audio_format;
+            string   audio_quality;
+            string   remux_video;
+            string   recode_video;
+            string   postprocessor_args;
+            bool     keep_video;
+            bool     no_keep_video;
+            bool     post_overwrites;
+            bool     no_post_overwrites;
+
+            // Options : 11 - 20
+
+            bool     embed_subs;
+            bool     no_embed_subs;
+            bool     embed_thumbnail;
+            bool     no_embed_thumbnail;
+            bool     embed_metadata;
+            bool     no_embed_metadata;
+            bool     embed_chapters;
+            bool     no_embed_chapters;
+            bool     embed_info_json;
+            bool     no_embed_info_json;
+
+            // Options : 21 - 30
+
+            string   parse_metadata;
+            string   replace_in_metadata;
+            bool     xattrs;
+            string   concat_playlist;
+            string   fixup;
+            string   ffmpeg_location;
+            string   exec;
+            bool     no_exec;
+            string   convert_subs;
+            string   convert_thumbnails;
+
+            // Options : 31 - 37
+
+            bool     split_chapters;
+            bool     no_split_chapters;
+            bool     remove_chapters;
+            bool     no_remove_chapters;
+            bool     force_keyframes_at_cuts;
+            bool     no_force_keyframes_at_cuts;
+            string   use_postprocessor;
+    };
 
     struct
     OptionsPostProcessing
@@ -295,6 +325,24 @@ options
         bool     no_force_keyframes_at_cuts;
         string   use_postprocessor;
     };
+
+
+    template<class T>
+    void
+    extract
+    (
+     boost::json::object const & obj,
+     T                         & t,
+     boost::json::string_view    key
+    );
+
+
+    jsonConfigReader::options::OptionsPostProcessing
+    tag_invoke
+    (
+     boost::json::value_to_tag< jsonConfigReader::options::OptionsPostProcessing >,
+     boost::json::value const & jv 
+    );
 
     // Option set : 15
 

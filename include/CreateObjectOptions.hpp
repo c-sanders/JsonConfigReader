@@ -21,80 +21,19 @@ namespace jsonConfigReader
 
 namespace createObjectOptions
 {
+    void
+    createObjectOptionsGeoRestriction
+    (
+    );
 
-void
-createObjectOptionsGeneral
-(
-);
-
-
-void
-createObjectOptionsNetwork
-(
-);
-
-
-void
-createObjectOptionsGeoRestriction
-(
-);
-
-/*
-{
-    jv = {
-      {"geo_verification_proxy", options.geo_verification_proxy},
-      {"xff",                    options.xff}
-    };
-}
- */
-
-
-void
-createObjectOptionsVideoSelection
-(
-);
-
-
-void
-createObjectOptionsDownload
-(
-);
-
-
-void
-createObjectOptionsFormat
-(
-);
-
-
-void
-createObjectOptionsSubtitle
-(
-);
-
-
-void
-createObjectOptionsAuthentication
-(
-);
-
-
-void
-createObjectOptionsPostProcessing
-(
-);
-
-
-void
-createObjectOptionsSponsorBlock
-(
-);
-
-
-void
-createObjectOptionsExtractor
-(
-);
+    /*
+    {
+        jv = {
+              {"geo_verification_proxy", options.geo_verification_proxy},
+              {"xff",                    options.xff}
+             };
+    }
+     */
 
 }  // End of namespace : createObjectOptions
 
@@ -102,45 +41,21 @@ createObjectOptionsExtractor
 namespace
 processObjectOptions
 {
-    void
-    processOptionsGeneral
-    (
-    );
-
-    void
-    processOptionsNetwork
-    (
-    );
-
     struct
-    jsonConfigReader::options::OptionsGeoRestriction
-    processObjectOptionsGeoRestriction
+    jsonConfigReader::optionsGeoRestriction::OptionsStruct
+    processOptionsGeoRestriction
     (
      const
      boost::json::object & obj
     );
 
-    void
-    processOptionsVideoSelection
-    (
-    );
 
     struct
-    jsonConfigReader::options::OptionsPostProcessing
+    jsonConfigReader::optionsPostProcessing::OptionsStruct
     processOptionsPostProcessing
     (
      const
      boost::json::object & obj
-    );
-
-    void
-    processObjectOptionsSponsorBlock
-    (
-    );
-
-    void
-    processObjectOptionsExtractor
-    (
     );
 
 }  // End of namespace : processObjectOptions

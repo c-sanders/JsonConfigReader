@@ -17,6 +17,11 @@ namespace
 jsonToObject
 {
     /*
+     * It appears as though I have moved the declarations for these functions
+     * into the file OptionsStructs.hpp.   
+     */
+
+    /*
     template<class T>
     void
     extract
