@@ -109,6 +109,7 @@ libdir_boost=c:\users\craig\boost_1_82_0\stage\x64\lib
 JsonConfigReader_obj_files=Main.obj \
                            Utilities.obj \
                            OptionsStructs.obj \
+                           OptionsNetwork.obj \
                            OptionsGeoRestriction.obj \
                            OptionsPostProcessing.obj \
                            CreateObjectOptions.obj
@@ -116,6 +117,9 @@ JsonConfigReader_obj_files=Main.obj \
 link_flags_ms=$(lib_files_ms)
 
 link_flags_advanced_ms=$(link_flags_ms)
+
+
+UnionTest_obj_files=UnionTest.obj
 
 
 # ======================================
@@ -137,7 +141,7 @@ link_flags_advanced_ms=$(link_flags_ms)
 #    pkgconfig --libs gtk4
 # ======================================
 
-all : Example-1.exe
+all : JsonConfigReader.exe
  
 
 .cpp.obj :
@@ -150,6 +154,10 @@ JsonConfigReader.exe : $(JsonConfigReader_obj_files)
 
 invoke_pkgconfig :
     $(pkgconfig) --libs gtk4
+
+
+UnionTest.exe : $(UnionTest_obj_files)
+    $(linker_ms) -out:UnionTest.exe $(UnionTest_obj_files)
 
 
 test :

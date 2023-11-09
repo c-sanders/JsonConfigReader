@@ -9,6 +9,7 @@
 // #include <boost/json/object.hpp>
 // Type(s) : object
 
+#include <OptionsNetwork.hpp>
 #include <OptionsGeoRestriction.hpp>
 #include <OptionsPostProcessing.hpp>
 
@@ -45,7 +46,7 @@ options
     // Options relating to the category : General
 
     struct
-    OptionsGeneral
+    OptionsGeneralStruct
     {
         // Options 1 - 10
 
@@ -88,28 +89,12 @@ options
     };
 
 
-    // Option set : 2
-    // 
-    // Options relating to the category : Network
-    
-    struct
-    OptionsNetwork
-    {
-        string   proxy;
-        string   socket_timeout;
-        string   source_address;
-        bool     force_ipv4;
-        bool     force_ipv6;
-        bool     enable_file_urls;
-    };
-
-
     // Option set : 4
     // 
     // Options relating to the category : Video selection
 
     struct
-    OptionsVideoSelection
+    OptionsVideoSelectionStruct
     {
         // Options 1 - 10
 
@@ -141,7 +126,7 @@ options
     // Option set : 5
 
     struct
-    OptionsDownload
+    OptionsDownloadStruct
     {
 
     };
@@ -149,7 +134,7 @@ options
     // Option set : 6
 
     struct
-    OptionsFilesystem
+    OptionsFilesystemStruct
     {
 
     };
@@ -157,7 +142,7 @@ options
     // Option set : 7
 
     struct
-    OptionsThumbnail
+    OptionsThumbnailStruct
     {
 
     };
@@ -165,7 +150,7 @@ options
     // Option set : 8
 
     struct
-    OptionsInternetShortcut
+    OptionsInternetShortcutStruct
     {
 
     };
@@ -173,7 +158,7 @@ options
     // Option set : 9
 
     struct
-    OptionsVerbosityAndSimulation
+    OptionsVerbosityAndSimulationStruct
     {
 
     };
@@ -181,7 +166,7 @@ options
     // Option set : 10
 
     struct
-    OptionsWorkarounds
+    OptionsWorkaroundsStruct
     {
 
     };
@@ -189,7 +174,7 @@ options
     // Option set : 11
 
     struct
-    OptionsVideoFormat
+    OptionsVideoFormatStruct
     {
 
     };
@@ -197,7 +182,7 @@ options
     // Option set : 12
 
     struct
-    OptionsSubtitle
+    OptionsSubtitleStruct
     {
 
     };
@@ -205,7 +190,7 @@ options
     // Option set : 13
 
     struct
-    OptionsAuthentication
+    OptionsAuthenticationStruct
     {
 
     };
@@ -274,7 +259,7 @@ options
     };
 
     struct
-    OptionsPostProcessing
+    OptionsPostProcessingStruct
     {
         // Options : 1 - 10
 
@@ -337,17 +322,17 @@ options
     );
 
 
-    jsonConfigReader::options::OptionsPostProcessing
+    jsonConfigReader::options::OptionsPostProcessingStruct
     tag_invoke
     (
-     boost::json::value_to_tag< jsonConfigReader::options::OptionsPostProcessing >,
+     boost::json::value_to_tag< jsonConfigReader::options::OptionsPostProcessingStruct >,
      boost::json::value const & jv 
     );
 
     // Option set : 15
 
     struct
-    OptionsSponsorBlock
+    OptionsSponsorBlockStruct
     {
 
     };
@@ -355,9 +340,59 @@ options
     // Option set : 16
 
     struct
-    OptionsExtractor
+    OptionsExtractorStruct
     {
 
+    };
+
+
+    // 8 November, 2023 :
+    // ==================
+    //
+    // I am not convinced about the merits of using a union below. Can it be
+    // replaced with classes and a class hierarchy?
+
+    union
+    OptionsUnion
+    {
+        /*
+        struct
+        jsonConfigReader::optionsGeneral::OptionsStruct                        optionsGeneral;                 // Field 1
+        struct
+        jsonConfigReader::optionsNetwork::OptionsStruct                  optionsNetwork;                 // Field 2
+        struct
+        jsonConfigReader::optionsVideoSelection::OptionsStruct           optionsVideoSelection;          // Field 4
+         */
+        struct
+        jsonConfigReader::optionsGeoRestriction::OptionsStruct                 optionsGeoRestriction;          // Field 3
+        /*
+        struct
+        jsonConfigReader::optionsDownload::OptionsStruct                 optionsDownload;                // Field 5
+        struct
+        jsonConfigReader::optionsFilesystem::OptionsStruct               optionsFilesystem;              // Field 6
+        struct
+        jsonConfigReader::optionsThumbnail::OptionsStruct                optionsThumbnail;               // Field 7
+        struct
+        jsonConfigReader::optionsInternetShortcut::OptionsStruct         optionsInternetShortcut;        // Field 8
+        struct
+        jsonConfigReader::optionsVerbosityAndSimulation::OptionsStruct   optionsVerbosityAndSimulation;  // Field 9
+        struct
+        jsonConfigReader::optionsWorkarounds::OptionsStruct              optionsWorkarounds;             // Field 10
+        struct
+        jsonConfigReader::optionsVideoFormat::OptionsStruct              optionsVideoFormat;             // Field 11
+        struct
+        jsonConfigReader::optionsSubtitle::OptionsStruct                 optionsSubtitle;                // Field 12
+        struct
+        jsonConfigReader::optionsAuthentication::OptionsStruct           optionsAuthentication;          // Field 13
+         */
+        struct
+        jsonConfigReader::optionsPostProcessing::OptionsStruct           optionsPostProcessing;          // Field 14
+        /*
+        struct
+        jsonConfigReader::optionsSponsorBlock::OptionsStruct             optionsSponsorBlock;            // Field 15
+        struct
+        jsonConfigReader::optionsExtractor::OptionsStruct                optionsExtractor;               // Field 16
+         */
     };
 
 }  // End of namespace : options

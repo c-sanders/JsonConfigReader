@@ -7,6 +7,161 @@ namespace jsonConfigReader
 namespace utilities
 {
 
+int
+displayOptions
+(
+ int    optionsCategory,
+ void * optionsStruct_p
+)
+{
+    const
+    string   nameFunction = "displayOptions",
+             nF           = nameFunction + " : ";
+
+
+    cout << nF << "Enter" << endl;
+
+    switch (optionsCategory)
+    {
+        case 1 :
+        {
+            // General options
+
+            break;
+        }
+        case 2 :
+        {
+            // Network options
+
+            const
+            struct
+            jsonConfigReader::optionsNetwork::OptionsStruct * optionsStruct_local_p = NULL;
+
+
+            optionsStruct_local_p = static_cast<const struct jsonConfigReader::optionsNetwork::OptionsStruct*>(optionsStruct_p);
+
+            cout << nF << "Options category = 2 : Network" << endl;
+
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            // cout << nF << "options.xff                    = " << optionsStruct_local_p->xff << endl;
+            // cout << nF << "options.geo_verification_proxy = " << optionsStruct_local_p->geo_verification_proxy << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+            break;
+        }
+        case 3 :
+        {
+            // Geo-restriction options
+
+            const
+            struct
+            jsonConfigReader::optionsGeoRestriction::OptionsStruct * optionsStruct_local_p = NULL;
+
+
+            optionsStruct_local_p = static_cast<const struct jsonConfigReader::optionsGeoRestriction::OptionsStruct*>(optionsStruct_p);
+
+            cout << nF << "Options category = 3 : Geo-restriction" << endl;
+
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            cout << nF << "options.xff                    = " << optionsStruct_local_p->xff << endl;
+            cout << nF << "options.geo_verification_proxy = " << optionsStruct_local_p->geo_verification_proxy << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+            break;
+        }
+        case 4 :
+        {
+            // Video selection options
+
+            break;
+        }
+        case 5 :
+        {
+            // Download options
+
+            break;
+        }
+        case 6 :
+        {
+            // Filesystem options
+
+            break;
+        }
+        case 7 :
+        {
+            // Thumbnail options
+
+            break;
+        }
+        case 8 :
+        {
+            // Internet Shortcut options
+
+            break;
+        }
+        case 9 :
+        {
+            // Verbosity and Simulation options
+
+            break;
+        }
+        case 10 :
+        {
+            // Workarounds options
+
+            break;
+        }
+        case 11 :
+        {
+            // Video format options
+
+            break;
+        }
+        case 12 :
+        {
+            // Subtitle options
+
+            break;
+        }
+        case 13 :
+        {
+            // Authentication options
+
+            break;
+        }
+        case 14 :
+        {
+            // Post-processing options
+
+            break;
+        }
+        case 15 :
+        {
+            // SponsorBlock options
+
+            break;
+        }
+        case 16 :
+        {
+            // Extractor options
+
+            break;
+        }
+        default :
+        {
+            cout << nF << "Unknown options category specified." << endl;
+        }
+    }
+
+    cout << nF << "Exit" << endl;
+
+    return 0;
+}
+
 /*
 boost::json::value
 parse_file
@@ -227,16 +382,19 @@ processJsonModel
 
                 jsonConfigReader::optionsGeoRestriction::OptionsStruct   options;
 
+                // jsonConfigReader::options::OptionsUnion   optionsUnion;
+
 
                 options = jsonConfigReader::processObjectOptions::processOptionsGeoRestriction
                           (
                            obj
                           );
 
-                cout << nF << "options.xff                    = " << options.xff << endl;
-                cout << nF << "options.geo_verification_proxy = " << options.geo_verification_proxy << endl;
-                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-                cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+                displayOptions
+                (
+                 3,
+                 & options
+                );
             }
             else
 

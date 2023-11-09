@@ -1,4 +1,4 @@
-#include <JsonToObject.hpp>
+#include <OptionsStructs.hpp>
 
 
 namespace
@@ -53,18 +53,18 @@ options
     // Note the discrepancy across three namespaces here. I think this is what
     // is causing the problems at compile time.
 
-    OptionsGeoRestriction
+    jsonConfigReader::optionsGeoRestriction::OptionsStruct
     tag_invoke
     (
-     boost::json::value_to_tag< OptionsGeoRestriction >,
+     boost::json::value_to_tag< jsonConfigReader::optionsGeoRestriction::OptionsStruct >,
      boost::json::value const & jv 
     )
     {
         const
-        string                     nameFunction = "configReader::tag_invoke",
-                                   nF = nameFunction + " : ";
+        string                                                   nameFunction = "configReader::tag_invoke",
+                                                                 nF = nameFunction + " : ";
 
-        OptionsGeoRestriction      options;
+        jsonConfigReader::optionsGeoRestriction::OptionsStruct   options;
 
         boost::json::object const& obj = jv.as_object();
 
@@ -106,7 +106,7 @@ options
     (
      boost::json::value_from_tag,
      boost::json::value         & jv,
-     OptionsGeoRestriction const& options
+     jsonConfigReader::optionsGeoRestriction::OptionsStruct const& options
     )
     {
         jv = {

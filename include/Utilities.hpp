@@ -58,6 +58,19 @@ namespace utilities
 	 boost::json::value   jv
 	);
 
+
+	int
+	displayOptions
+	(
+	 // Argument could be one of the following types.
+	 // 
+	 // jsonConfigReader::optionsGeoRestriction::OptionsStruct
+	 // jsonConfigReader::optionsPostProcessing::OptionsStruct
+
+	 int    optionsCategory,
+	 void * optionsStruct_p
+	);
+
 }  // End of namespace : utilities
 
 }  // End of namespace : jsonConfigReader
