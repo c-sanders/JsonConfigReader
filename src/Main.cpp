@@ -20,11 +20,9 @@ using std::endl;
  *    |
  *    |- jsonConfigReader::utilities::processJsonModel                                    (Utilities.cpp)
  *         |
- *         |- jsonConfigReader::processObjectOptions::processOptionsGeneral               (CreateObjectOptions.cpp)
- *              |                                   ||processOptionsGeoRestriction        (CreateObjectOptions.cpp) 
- *              |                                   ||processObjectOptionsPostProcessing  (CreateObjectOptions.cpp)
+ *         |- jsonConfigReader::processObjectOptions::processOptionsXXX                   (CreateObjectOptions.cpp)
  *              |
- *              |- 
+ *              |- jsonConfigReader::optionsXXX::tag_invoke                               (OptionsXXX.cpp)
  */
 
 int

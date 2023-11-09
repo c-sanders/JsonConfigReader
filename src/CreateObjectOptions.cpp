@@ -164,64 +164,64 @@ processOptionsGeoRestriction
     return options;
 }
 
-    void
-    processOptionsVideoSelection
-    (
-    )
-    {
-    }
+void
+processOptionsVideoSelection
+(
+)
+{
+}
 
 
+struct
+jsonConfigReader::optionsPostProcessing::OptionsStruct
+processOptionsPostProcessing
+(
+ const
+ boost::json::object & obj
+)
+{
+    const
+    string   nameFunction = "jsonConfigReader::processObjectOptions::processOptionsPostProcessing",
+             nF           = nameFunction + " : ";
+
+    auto
+    const  & objValue = obj.at("OptionsPostProcessing");
+
+    /*
     struct
-    jsonConfigReader::optionsPostProcessing::OptionsStruct
-    processObjectOptionsPostProcessing
+    jsonConfigReader::optionsPostProcessing::OptionsStruct   rarr;
+     */
+
+    // Create a new object of type struct OptionsPostProcessing
+
+    /*
+    jsonConfigReader::options::OptionsGeoRestriction
+    options
     (
-     const
-     boost::json::object & obj
-    )
-    {
-        const
-        string   nameFunction = "processObjectOptionsPostProcessing",
-                 nF           = nameFunction + " : ";
+     boost::json::value_to<jsonConfigReader::options::OptionsGeoRestriction>
+     (
+      objValue
+     )
+    );
+     */
 
-        auto
-        const  & objValue = obj.at("OptionsPostProcessing");
+    // The compiler doesn't like the following instruction.
 
-        /*
-        struct
-        jsonConfigReader::optionsPostProcessing::OptionsStruct   rarr;
-         */
+    jsonConfigReader::optionsPostProcessing::OptionsStruct
+    options
+    (
+     boost::json::value_to<jsonConfigReader::optionsPostProcessing::OptionsStruct>
+     (
+      objValue
+     )
+    );
 
-        // Create a new object of type struct OptionsPostProcessing
-
-        /*
-        jsonConfigReader::options::OptionsGeoRestriction
-        options
-        (
-         boost::json::value_to<jsonConfigReader::options::OptionsGeoRestriction>
-         (
-          objValue
-         )
-        );
-         */
-
-        // The compiler doesn't like the following instruction.
-
-        jsonConfigReader::optionsPostProcessing::OptionsStruct
-        options
-        (
-         boost::json::value_to<jsonConfigReader::optionsPostProcessing::OptionsStruct>
-         (
-          objValue
-         )
-        );
-
-        cout << "Object is of type : OptionsPostProcessing" << endl;
-        cout << "!!! objValue = " << boost::json::serialize(objValue) << endl;
+    cout << "Object is of type : OptionsPostProcessing" << endl;
+    cout << "!!! objValue = " << boost::json::serialize(objValue) << endl;
 
 
-        return options;
-    }
+    return options;
+}
 
 
     void
