@@ -305,12 +305,12 @@ parseFile
 
 
 int
-processJsonModel
+processJsonNode
 (
- boost::json::value   jv
+ boost::json::value   jsonNode
 )
 {
-    string               nameFunction  = "processJsonModel",
+    string               nameFunction  = "processJsonNode",
                          nF            = nameFunction + " : ";
 
     int                  status        = -1;
@@ -325,12 +325,12 @@ processJsonModel
 
     // Maybe make the following code recursive.
 
-    switch (jv.kind())
+    switch (jsonNode.kind())
     {
         case boost::json::kind::object :
         {
             auto
-            const  & obj = jv.get_object();
+            const  & obj = jsonNode.get_object();
 
             string   indent = "    ";
 
@@ -357,9 +357,12 @@ processJsonModel
             )
             {
                 // auto
-                // const & obj_local = iter->get_object();
+                // const & obj_local = iter->value();
 
-                // How do I get at the current element in the object? 
+                boost::json::value   obj_local;
+                
+                
+                obj_local = iter->value();
 
                 cout << nF << "Counter = " << ++counter << endl;
                 cout << nF << "Element name  = " << iter->key() << endl;
@@ -395,8 +398,9 @@ processJsonModel
                     cout << nF << "Object contains a key : OptionsGeneral" << endl;
 
                     // jsonConfigReader::processObjectOptions::processOptionsGeneral();
+
+                    continue;
                 }
-                else
 
                 // Option set : 2
                 
@@ -407,8 +411,9 @@ processJsonModel
                     // jsonConfigReader::options::OptionsNetwork   options;
 
                     // jsonConfigReader::processObjectOptions::processOptionsNetwork();
+                
+                    continue;
                 }
-                else
 
                 // Option set : 3
 
@@ -440,8 +445,9 @@ processJsonModel
                      3,
                      & options
                     );
+
+                    continue;
                 }
-                else
 
                 // Option set : 4
 
@@ -450,32 +456,36 @@ processJsonModel
                     cout << nF << "Object contains a key : OptionsVideoSelection" << endl;
 
                     // jsonConfigReader::processObjectOptions::processOptionsVideoSelection();
+                
+                    continue;
                 }
-                else
 
                 // Option set : 5
 
                 if (obj.contains("OptionsDownload"))
                 {
                     cout << nF << "Object contains a key : OptionsDownload" << endl;
+                
+                    continue;
                 }
-                else
 
                 // Option set : 6
 
                 if (obj.contains("OptionsFilesystem"))
                 {
                     cout << nF << "Object contains a key : OptionsFilesystem" << endl;
+                
+                    continue;
                 }
-                else
 
                 // Option set : 7
 
                 if (obj.contains("OptionsThumbnail"))
                 {
                     cout << nF << "Object contains a key : OptionsThumbnail" << endl;
+                
+                    continue;
                 }
-                else
 
                 // Option set : 8
 
@@ -556,9 +566,16 @@ processJsonModel
                 }
                 else
                 {
-                    // Unknown JSON object type.
+                    // We are dealing with a JSON object type.
+                    //
+                    // Unknown JSON object type. It could be a compound JSON
+                    // object type.
+
+                    processJsonNode(obj_local);
                 }
-            }
+            
+            }  // End of for loop that iterates over each value in the current
+               // JSON object.
 
             cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
             cout << nF << "Have exited the for loop" << endl;
@@ -642,7 +659,7 @@ processJsonModel
 
     return status;
 
-}  // End of function : processJsonModel
+}  // End of function : processJsonNode
 
 }  // End of namespace : utilities
 

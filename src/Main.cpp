@@ -74,7 +74,7 @@ main
 
     cout << nF << "About to invoke function : processJsonModel" << endl;
 
-    jsonConfigReader::utilities::processJsonModel(jsonModel);
+    jsonConfigReader::utilities::processJsonNode(jsonModel);
 
     cout << nF << "Have invoked function : processJsonModel" << endl;
 
