@@ -1,0 +1,4 @@
+{
+    "geo_verification_proxy" : "http:///www.proxy.com:800",
+    "xff"                    : "Poop"
+}

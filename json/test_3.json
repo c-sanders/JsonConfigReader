@@ -1,0 +1,12 @@
+{
+  "OptionsNetwork" :
+  {
+    "proxy"          : "http:///www.proxy.com:800",
+    "socket_timeout" : "200"
+  },
+  "OptionsGeoRestriction" :
+  {
+    "geo_verification_proxy" : "http:///www.proxy.com:800",
+    "xff"                    : "Poop"
+  }
+}
