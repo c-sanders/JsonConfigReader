@@ -46,7 +46,7 @@ processObjectOptions
     processOptionsGeoRestriction
     (
      const
-     boost::json::object & obj
+     boost::json::value & obj
     );
 
 

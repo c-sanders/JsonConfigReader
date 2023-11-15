@@ -60,6 +60,21 @@ namespace utilities
 
 
 	int
+	processJsonObject
+	(
+	 boost::json::value   jsonNode
+	);
+
+
+	jsonConfigReader::optionsGeoRestriction::OptionsStruct
+	processValue_optionsGeoRestriction
+	(
+	 const
+	 boost::json::value   jsonNode
+	);
+
+
+	int
 	displayOptions
 	(
 	 // Argument could be one of the following types.

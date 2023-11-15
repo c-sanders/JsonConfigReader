@@ -313,7 +313,7 @@ processJsonNode
     string               nameFunction  = "processJsonNode",
                          nF            = nameFunction + " : ";
 
-    int                  status        = -1;
+    int                  returnCode    = -1;
 
     int                  counter_inner = 0,
                          counter_outer = 0;
@@ -323,301 +323,11 @@ processJsonNode
 
     cout << nF << "Enter" << endl;
 
-    // Maybe make the following code recursive.
-
     switch (jsonNode.kind())
     {
         case boost::json::kind::object :
         {
-            auto
-            const  & obj = jsonNode.get_object();
-
-            string   indent = "    ";
-
-            boost::json::object::const_iterator   iter;
-
-            // auto     iter = obj.begin
-
-            int      counter = 0;
-
-
-            cout << nF << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
-            cout << nF << "Type of JSON element : json::kind::object" << endl;
-            cout << nF << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
-            cout << nF << boost::json::serialize(obj) << endl;
-            cout << nF << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
-            cout << nF << "Number of elements in object = " << obj.size() << endl;
-            cout << nF << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
-
-            for
-            (
-             iter  = obj.begin();
-             iter != obj.end();
-             ++iter
-            )
-            {
-                // auto
-                // const & obj_local = iter->value();
-
-                boost::json::value   obj_local;
-                
-                
-                obj_local = iter->value();
-
-                cout << nF << "Counter = " << ++counter << endl;
-                cout << nF << "Element name  = " << iter->key() << endl;
-                cout << nF << "Element value = " << boost::json::serialize(iter->value()) << endl;
-                cout << nF << "----------------------------------------" << endl;
-
-                // Bear in mind that the current JSON object may be comprised of
-                // multiple elements, such as is shown in the following example
-                // which contains two top-level elements, OptionsNetwork and
-                // OptionsGeoRestriction.
-                //
-                // {
-                //   "OptionsNetwork" :
-                //   {
-                //     "proxy"          : "http:///www.proxy.com:800",
-                //     "socket_timeout" : "200"
-                //   },
-                //   "OptionsGeoRestriction" :
-                //   {
-                //     "geo_verification_proxy" : "http:///www.proxy.com:800",
-                //     "xff" : "Poop"
-                //   }
-                // }
-
-                // How many elements in the current object?
-
-                // How can the type of the JSON object be determined?
-
-                // Option set : 1
-
-                if (obj.contains("OptionsGeneral"))
-                {
-                    cout << nF << "Object contains a key : OptionsGeneral" << endl;
-
-                    // jsonConfigReader::processObjectOptions::processOptionsGeneral();
-
-                    continue;
-                }
-
-                // Option set : 2
-                
-                if (obj.contains("OptionsNetwork"))
-                {
-                    cout << nF << "Object contains a key : OptionsNetwork" << endl;
-
-                    // jsonConfigReader::options::OptionsNetwork   options;
-
-                    // jsonConfigReader::processObjectOptions::processOptionsNetwork();
-                
-                    continue;
-                }
-
-                // Option set : 3
-
-                if (obj.contains("OptionsGeoRestriction"))
-                {
-                    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-                    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-                    cout << nF << "Object contains a key : OptionsGeoRestriction" << endl;
-                    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-
-                    // jsonConfigReader::processObjectOptions::processOptionsGeoRestriction(obj);
-
-                    // Create an empty struct object of type OptionsGeoRestriction.
-                    // This will be used to hold the values which have been read in
-                    // from the JSON file.
-
-                    jsonConfigReader::optionsGeoRestriction::OptionsStruct   options;
-
-                    // jsonConfigReader::options::OptionsUnion   optionsUnion;
-
-
-                    options = jsonConfigReader::processObjectOptions::processOptionsGeoRestriction
-                              (
-                               obj
-                              );
-
-                    displayOptions
-                    (
-                     3,
-                     & options
-                    );
-
-                    continue;
-                }
-
-                // Option set : 4
-
-                if (obj.contains("OptionsVideoSelection"))
-                {
-                    cout << nF << "Object contains a key : OptionsVideoSelection" << endl;
-
-                    // jsonConfigReader::processObjectOptions::processOptionsVideoSelection();
-                
-                    continue;
-                }
-
-                // Option set : 5
-
-                if (obj.contains("OptionsDownload"))
-                {
-                    cout << nF << "Object contains a key : OptionsDownload" << endl;
-                
-                    continue;
-                }
-
-                // Option set : 6
-
-                if (obj.contains("OptionsFilesystem"))
-                {
-                    cout << nF << "Object contains a key : OptionsFilesystem" << endl;
-                
-                    continue;
-                }
-
-                // Option set : 7
-
-                if (obj.contains("OptionsThumbnail"))
-                {
-                    cout << nF << "Object contains a key : OptionsThumbnail" << endl;
-                
-                    continue;
-                }
-
-                // Option set : 8
-
-                if (obj.contains("OptionsInternetShortcut"))
-                {
-                    cout << nF << "Object contains a key : OptionsInternetShortcut" << endl;
-                }
-                else
-
-                // Option set : 9
-
-                if (obj.contains("OptionsVerbosityAndSimulation"))
-                {
-                }
-                else
-
-                // Option set : 10
-
-                if (obj.contains("OptionsWorkarounds"))
-                {
-                }
-                else
-
-                // 11
-
-                if (obj.contains("OptionsVideoFormat"))
-                {
-                }
-                else
-
-                // 12
-
-                if (obj.contains("OptionsSubtitle"))
-                {
-                }
-                else
-
-                // 13
-
-                if (obj.contains("OptionsAuthentication"))
-                {
-                }
-                else
-
-                // 14
-
-                if (obj.contains("OptionsPostProcessing"))
-                {
-                    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-                    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-                    cout << nF << "Object contains a key : OptionsPostProcessing" << endl;
-                    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-
-                    jsonConfigReader::optionsPostProcessing::OptionsStruct   options;
-
-
-                    options = jsonConfigReader::processObjectOptions::processOptionsPostProcessing
-                              (
-                               obj
-                              );
-
-                    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-                    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-                }
-                else
-
-                // 15
-
-                if (obj.contains("OptionsSponsorBlock"))
-                {
-                }
-                else
-
-                // 16
-
-                if (obj.contains("OptionsExtractor"))
-                {
-                }
-                else
-                {
-                    // We are dealing with a JSON object type.
-                    //
-                    // Unknown JSON object type. It could be a compound JSON
-                    // object type.
-
-                    processJsonNode(obj_local);
-                }
-            
-            }  // End of for loop that iterates over each value in the current
-               // JSON object.
-
-            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-            cout << nF << "Have exited the for loop" << endl;
-            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-   
-            /*
-            counter_outer++;
-
-            cout << "Counter outer = " << counter_outer << endl;
-
-            if (!obj.empty())
-            {
-                auto it = obj.begin();
-
-
-                // Variable it is of type boost::json::key_value_pair
-
-                counter_inner++;
-
-                cout << "Counter inner = " << counter_inner << endl;
-
-                cout << "json::kind::object" << endl;
-
-                for (;;)
-                {
-                    cout << "For loop contents :" << endl;
-                    cout << "-------------------" << endl;
-
-                    cout << indent << boost::json::serialize(it->key()) << " : ";
-                    cout << boost::json::serialize(it->value()) << endl;
-
-                    ++it;
-
-                    if (it == obj.end())
-                    {
-                        break;
-                    }
-                }
-            }
-
-             */
-
+            processJsonObject(jsonNode);
             break;
         }
         case boost::json::kind::array :
@@ -655,11 +365,436 @@ processJsonNode
             cout << "json::kind::null" << endl;
             break;
         }
+        default :
+        {
+            cout << nF << "Unknown JSON datatype" << endl;
+        }
     }
 
-    return status;
+    returnCode = 0;
+
+    goto return_routine;
+
+
+return_failure_routine :
+
+
+return_routine :
+
+    return returnCode;
 
 }  // End of function : processJsonNode
+
+
+int
+processJsonObject
+(
+ boost::json::value   jsonNode
+)
+{
+    int                                   returnCode = -1;
+
+    const
+    string                                nameFunction = "processJsonObject",
+                                          nF = nameFunction + " : ";
+
+    // auto
+    // const                               & obj = jsonNode.get_object();
+
+    const
+    boost::json::object                 & obj = jsonNode.get_object();
+
+    string                                indent = "    ";
+
+    boost::json::object::const_iterator   iter;
+
+    // auto     iter = obj.begin
+
+    int                                   counter = 0;
+
+
+    cout << nF << "Enter" << endl;
+
+    cout << nF << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
+    cout << nF << "Type of JSON element : json::kind::object" << endl;
+    cout << nF << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
+    cout << nF << boost::json::serialize(obj) << endl;
+    cout << nF << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
+    cout << nF << "Number of elements in object = " << obj.size() << endl;
+    cout << nF << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
+
+    // Iterate over all the values that comprise the current JSON object.
+    
+    for
+    (
+     iter  = obj.begin();
+     iter != obj.end();
+     ++iter
+    )
+    {
+        auto
+        const & obj_optionsGeoRestriction = obj.at("OptionsGeoRestriction");
+
+        boost::json::value   obj_local;
+
+        obj_local = iter->value();
+
+
+        cout << nF << "Element       = " << boost::json::serialize(obj_optionsGeoRestriction) << endl;
+        cout << nF << "Element value = " << boost::json::serialize(iter->value()) << endl;
+
+        cout << nF << "Counter = " << ++counter << endl;
+        cout << nF << "Element name  = " << iter->key() << endl;
+        cout << nF << "Element value = " << boost::json::serialize(iter->value()) << endl;
+        cout << nF << "----------------------------------------" << endl;
+
+        // Bear in mind that the current JSON object may be comprised of
+        // multiple elements, such as is shown in the following example
+        // which contains two top-level elements, OptionsNetwork and
+        // OptionsGeoRestriction.
+        //
+        // {
+        //   "OptionsNetwork" :
+        //   {
+        //     "proxy"          : "http:///www.proxy.com:800",
+        //     "socket_timeout" : "200"
+        //   },
+        //   "OptionsGeoRestriction" :
+        //   {
+        //     "geo_verification_proxy" : "http:///www.proxy.com:800",
+        //     "xff" : "Poop"
+        //   }
+        // }
+
+        // How many elements in the current object?
+
+        // How can the type of the JSON object be determined?
+
+        // Option set : 1
+
+        if (iter->key() == "OptionsGeneral")
+        {
+            cout << nF << "Object contains a key : OptionsGeneral" << endl;
+
+            // jsonConfigReader::processObjectOptions::processOptionsGeneral();
+
+            continue;
+        }
+
+        // Option set : 2
+
+        if (iter->key() == "OptionsNetwork")
+        {
+            cout << nF << "Object contains a key : OptionsNetwork" << endl;
+
+            // jsonConfigReader::options::OptionsNetwork   options;
+
+            // jsonConfigReader::processObjectOptions::processOptionsNetwork();
+
+            continue;
+        }
+
+        // Option set : 3
+
+        if (iter->key() == "OptionsGeoRestriction")
+        {
+            jsonConfigReader::optionsGeoRestriction::OptionsStruct   options;
+
+
+            options = processValue_optionsGeoRestriction(iter->value());
+
+            displayOptions
+            (
+             3,
+             & options
+            );
+
+            continue;
+        }
+
+        // Option set : 4
+
+        if (iter->key() == "OptionsVideoSelection")
+        {
+            cout << nF << "Object contains a key : OptionsVideoSelection" << endl;
+
+            // jsonConfigReader::processObjectOptions::processOptionsVideoSelection();
+
+            continue;
+        }
+
+        // Option set : 5
+
+        if (iter->key() == "OptionsDownload")
+        {
+            cout << nF << "Object contains a key : OptionsDownload" << endl;
+
+            continue;
+        }
+
+        // Option set : 6
+
+        if (iter->key() == "OptionsFilesystem")
+        {
+            cout << nF << "Object contains a key : OptionsFilesystem" << endl;
+
+            continue;
+        }
+
+        // Option set : 7
+
+        if (iter->key() == "OptionsThumbnail")
+        {
+            cout << nF << "Object contains a key : OptionsThumbnail" << endl;
+
+            continue;
+        }
+
+        // Option set : 8
+
+        if (iter->key() == "OptionsInternetShortcut")
+        {
+            cout << nF << "Object contains a key : OptionsInternetShortcut" << endl;
+
+            continue;
+        }
+
+        // Option set : 9
+
+        if (iter->key() == "OptionsVerbosityAndSimulation")
+        {
+            continue;
+        }
+
+        // Option set : 10
+
+        if (iter->key() == "OptionsWorkarounds")
+        {
+            continue;
+        }
+
+        // Option set : 11
+
+        if (iter->key() == "OptionsVideoFormat")
+        {
+            continue;
+        }
+
+        // Option set : 12
+
+        if (iter->key() == "OptionsSubtitle")
+        {
+            continue;
+        }
+
+        // Option set : 13
+
+        if (iter->key() == "OptionsAuthentication")
+        {
+            continue;
+        }
+
+        // Option set : 14
+
+        if (iter->key() == "OptionsPostProcessing")
+        {
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            cout << nF << "Object contains a key : OptionsPostProcessing" << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+            jsonConfigReader::optionsPostProcessing::OptionsStruct   options;
+
+
+            /*
+            options = jsonConfigReader::processObjectOptions::processOptionsPostProcessing
+                      (
+                       obj
+                      );
+             */
+
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+            continue;
+        }
+
+        // Option set : 15
+
+        if (iter->key() == "OptionsSponsorBlock")
+        {
+            continue;
+        }
+
+        // Option set : 16
+
+        if (iter->key() == "OptionsExtractor")
+        {
+            continue;
+        }
+
+        // We know we are dealing with a JSON object type. Despite this,
+        // the JSON object type that we are dealing with, is unknown. It
+        // could very well be a compound JSON object type.
+
+        processJsonNode(obj_local);
+
+    }  // End of for loop that iterates over each value in the current
+       // JSON object.
+
+    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << nF << "Have exited the for loop" << endl;
+    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+    /*
+    counter_outer++;
+
+    cout << "Counter outer = " << counter_outer << endl;
+
+    if (!obj.empty())
+    {
+        auto it = obj.begin();
+
+
+        // Variable it is of type boost::json::key_value_pair
+
+        counter_inner++;
+
+        cout << "Counter inner = " << counter_inner << endl;
+
+        cout << "json::kind::object" << endl;
+
+        for (;;)
+        {
+            cout << "For loop contents :" << endl;
+            cout << "-------------------" << endl;
+
+            cout << indent << boost::json::serialize(it->key()) << " : ";
+            cout << boost::json::serialize(it->value()) << endl;
+
+            ++it;
+
+            if (it == obj.end())
+            {
+                break;
+            }
+        }
+    }
+
+     */
+
+    returnCode = 0;
+
+    goto return_routine;
+
+
+return_failure_routine :
+
+
+return_routine :
+
+    cout << nF << "Exit" << endl;
+
+    return returnCode;
+}
+
+
+jsonConfigReader::optionsGeoRestriction::OptionsStruct
+processValue_optionsGeoRestriction
+(
+ const
+ boost::json::value   jsonNode
+)
+{
+    const
+    string   nameFunction = "processValue_optionsGeoRestriction",
+             nF           = nameFunction + " : ";
+
+    int      returnCode   = -1;
+
+    // jsonConfigReader::optionsGeoRestriction::OptionsStruct   options;
+
+
+    cout << nF << "Enter" << endl;
+
+    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << nF << "JSON value is of type : OptionsGeoRestriction" << endl;
+    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << nF << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+    // Create a new object called options.
+    // 
+    // This object will be of type struct optionsGeoRestriction::OptionsStruct
+    // 
+    // The process of doing this will invoke the function tag_invoke, which will
+    // in turn invoke the function extract.
+    //
+    //   - jsonConfigReader::optionsOptionsGeoRestriction::tag_invoke
+    // 
+    //       - jsonConfigReader::optionsGeoRestriction::extract
+    //
+    // From what I can gather, the tag_invoke function should reside in the same
+    // namespace that the struct is defined in.
+    // 
+    // How does the tag_invoke function know which extract function to use? 
+    // 
+    // -------------------------------------------------------------------------
+    // What if we had the following?
+    //
+    //   class
+    //   optionsOptionsGeoRestriction
+    //   {
+    //     private :
+    // 
+    //       // Elements from the struct  
+    // 
+    //     public :
+    //   
+    //       tag_invoke();  // Or should this be a free floating function?
+    // 
+    //       extract();
+    //   };
+
+    jsonConfigReader::optionsGeoRestriction::OptionsStruct
+    options
+    (
+     boost::json::value_to<jsonConfigReader::optionsGeoRestriction::OptionsStruct>
+     (
+      jsonNode
+     )
+    );
+
+    // Populate the data structure with the relevant values from the JSON file.
+    //
+    // The function processOptionsGeoRestriction is defined in the file;
+    //
+    //   - CreateObjectOptions
+
+    /*
+    options
+    =
+    jsonConfigReader::processObjectOptions::processOptionsGeoRestriction
+    (
+     jsonNode
+    );
+     */
+
+    returnCode = 0;
+
+    goto return_routine;
+
+
+return_failure_routine :
+
+
+return_routine :
+
+    cout << nF << "Exit" << endl;
+
+    return options;
+}
+
 
 }  // End of namespace : utilities
 
