@@ -144,11 +144,6 @@ processOptionsGeoRestriction
              nF           = nameFunction + " : ";
 
     cout << nF << "Enter" << endl;
-    
-    // auto
-    // const  & objValue    = obj.at("OptionsGeoRestriction");
-     
-    // Create a new object of type struct optionsGeoRestriction::OptionsStruct
 
     jsonConfigReader::optionsGeoRestriction::OptionsStruct
     options

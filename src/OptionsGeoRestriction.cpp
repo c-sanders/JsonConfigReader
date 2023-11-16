@@ -31,16 +31,16 @@ jsonConfigReader::optionsGeoRestriction::OptionsStruct
 jsonConfigReader::optionsGeoRestriction::tag_invoke
 (
  boost::json::value_to_tag< jsonConfigReader::optionsGeoRestriction::OptionsStruct >,
- boost::json::value const& jv
+ boost::json::value const & jv
 ) 
 {
     const
-    string                     nameFunction = "jsonConfigReader::optionsOptionsGeoRestriction::tag_invoke",
-                               nF = nameFunction + " : ";
+    string                      nameFunction = "jsonConfigReader::optionsOptionsGeoRestriction::tag_invoke",
+                                nF = nameFunction + " : ";
 
-    OptionsStruct              options;
+    OptionsStruct               options;
 
-    boost::json::object const& obj = jv.as_object();
+    boost::json::object const & obj = jv.as_object();
 
 
     cout << nF << "Enter" << endl;

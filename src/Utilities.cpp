@@ -707,12 +707,17 @@ processValue_optionsGeoRestriction
 )
 {
     const
-    string   nameFunction = "processValue_optionsGeoRestriction",
-             nF           = nameFunction + " : ";
+    string   nameFunction     = "processValue_optionsGeoRestriction",
+             nF               = nameFunction + " : ";
 
-    int      returnCode   = -1;
+    int      returnCode       = -1;
 
-    // jsonConfigReader::optionsGeoRestriction::OptionsStruct   options;
+    const
+    boost::json::object & obj = jsonNode.as_object();
+
+    jsonConfigReader::optionsGeoRestriction::OptionsStruct   options;
+
+    stringstream                value;
 
 
     cout << nF << "Enter" << endl;
@@ -737,7 +742,8 @@ processValue_optionsGeoRestriction
     // From what I can gather, the tag_invoke function should reside in the same
     // namespace that the struct is defined in.
     // 
-    // How does the tag_invoke function know which extract function to use? 
+    // How does the tag_invoke function know which extract function to use? The
+    // version of it which resides within the same namespace? 
     // 
     // -------------------------------------------------------------------------
     // What if we had the following?
@@ -756,6 +762,29 @@ processValue_optionsGeoRestriction
     //       extract();
     //   };
 
+    // - Create an object.
+    // - Populate it with values from the JSON node.
+
+    // Convert the variable jsonNode into a JSON object.
+
+    // Maybe write these into stringstreams first.
+
+    value.clear();
+    value << obj.at("geo_verification_proxy");
+    options.geo_verification_proxy = value.str();
+
+    value.clear();
+    value << obj.at("xff");
+    options.xff = value.str();
+
+    cout << nF << "++++++++++++++++++++++++++++++++++++++++" << endl;
+    cout << nF << "obj = " << boost::json::serialize(obj) << endl;
+    cout << nF << "++++++++++++++++++++++++++++++++++++++++" << endl;
+    cout << nF << "geo_verification_proxy = " << options.geo_verification_proxy << endl;
+    cout << nF << "xff                    = " << options.xff << endl;
+    cout << nF << "++++++++++++++++++++++++++++++++++++++++" << endl;
+
+    /*
     jsonConfigReader::optionsGeoRestriction::OptionsStruct
     options
     (
@@ -763,20 +792,6 @@ processValue_optionsGeoRestriction
      (
       jsonNode
      )
-    );
-
-    // Populate the data structure with the relevant values from the JSON file.
-    //
-    // The function processOptionsGeoRestriction is defined in the file;
-    //
-    //   - CreateObjectOptions
-
-    /*
-    options
-    =
-    jsonConfigReader::processObjectOptions::processOptionsGeoRestriction
-    (
-     jsonNode
     );
      */
 
